@@ -1,0 +1,143 @@
+{:snapshot-set "2026-11-21"
+ :compared-at "2026-11-21T02:48:33Z"
+ :old {:retrieved-at "2026-07-10" :dir "raw/wdi/"}
+ :new {:retrieved-at "2026-11-21T02:48:33Z" :dir "raw/wdi/2026-11-21/"}
+ :economy-key "country.id (countryiso3code is empty for income-group aggregates)"
+ :value-semantics "values compared as JSON numbers; :n-value-changed counts economies non-null in both files whose values differ"
+ :indicators
+ [ {:indicator "EG.ELC.RNEW.ZS" :observation-year 2021
+  :old-path "raw/wdi/renewable-electricity-share-2021.json" :new-path "raw/wdi/2026-11-21/renewable-electricity-share-2021.json"
+  :records-old 265 :records-new 266
+  :economies-in-both 265 :only-in-old [] :only-in-new ["F2"]
+  :n-value-changed 77
+  :n-became-null 0 :became-null []
+  :n-became-valued 0 :became-valued []
+  :examples
+  [   {:economy "1A" :name "Arab World" :old 4.79067848099356 :new 4.78612457758233}
+   {:economy "1W" :name "World" :old 27.8356846766988 :new 27.8380722078159}
+   {:economy "4E" :name "East Asia & Pacific (excluding high income)" :old 28.1838753579584 :new 28.1796137573706}
+   {:economy "7E" :name "Europe & Central Asia (excluding high income)" :old 25.7884232832117 :new 25.779555705277}
+   {:economy "8S" :name "South Asia" :old 19.3206102539249 :new 19.3192680970013}
+   {:economy "BD" :name "Bangladesh" :old 1.50701993704092 :new 1.50700412377625}
+   {:economy "CI" :name "Cote d'Ivoire" :old 22.7753265853448 :new 22.7950471902329}
+   {:economy "CM" :name "Cameroon" :old 61.8966686856451 :new 65.8110510046368}
+   {:economy "CN" :name "China" :old 28.427997926748 :new 28.4280012326943}
+   {:economy "CO" :name "Colombia" :old 75.1246222666381 :new 76.1979606612767}
+   {:economy "DE" :name "Germany" :old 39.8305665158005 :new 39.832111961348}
+   {:economy "DZ" :name "Algeria" :old 0.913584728890971 :new 0.912964610055238}
+   {:economy "ER" :name "Eritrea" :old 5.05022831050228 :new 5.02727272727273}
+   {:economy "EU" :name "European Union" :old 37.7828384531169 :new 37.7842505866846}
+   {:economy "FR" :name "France" :old 22.8038733642766 :new 22.8074034074034}
+   {:economy "GA" :name "Gabon" :old 31.5882541720154 :new 32.963496316142}
+   {:economy "HK" :name "Hong Kong SAR, China" :old 0.83458081824279 :new 0.83554469273743}
+   {:economy "HN" :name "Honduras" :old 64.6209532374101 :new 64.94215996385}
+   {:economy "ID" :name "Indonesia" :old 15.5300398228856 :new 15.4607636838472}
+   {:economy "IN" :name "India" :old 19.131292447169 :new 19.1298662811444}]}
+ {:indicator "EG.ELC.FOSL.ZS" :observation-year 2022
+  :old-path "raw/wdi/fossil-electricity-share-2022.json" :new-path "raw/wdi/2026-11-21/fossil-electricity-share-2022.json"
+  :records-old 265 :records-new 266
+  :economies-in-both 265 :only-in-old [] :only-in-new ["F2"]
+  :n-value-changed 129
+  :n-became-null 0 :became-null []
+  :n-became-valued 0 :became-valued []
+  :examples
+  [   {:economy "1A" :name "Arab World" :old 92.9166612977352 :new 92.8398334289405}
+   {:economy "1W" :name "World" :old 60.7302895161378 :new 60.7239673096705}
+   {:economy "4E" :name "East Asia & Pacific (excluding high income)" :old 65.493902385994 :new 65.5507644735926}
+   {:economy "7E" :name "Europe & Central Asia (excluding high income)" :old 62.524555278239 :new 62.4588229566798}
+   {:economy "8S" :name "South Asia" :old 75.6247974932224 :new 75.7749448165011}
+   {:economy "AE" :name "United Arab Emirates" :old 81.7670067808387 :new 81.7605733475727}
+   {:economy "AO" :name "Angola" :old 27.1141280213157 :new 29.5060080106809}
+   {:economy "AT" :name "Austria" :old 19.5091989074039 :new 19.485644895481}
+   {:economy "BD" :name "Bangladesh" :old 98.3771055614179 :new 98.371536696798}
+   {:economy "BE" :name "Belgium" :old 25.590169572785 :new 25.5893694632621}
+   {:economy "BF" :name "Burkina Faso" :old 85.9796285200719 :new 83.1798649478207}
+   {:economy "BH" :name "Bahrain" :old 99.8569304569809 :new 99.7558834823633}
+   {:economy "BO" :name "Bolivia" :old 63.4028751753156 :new 63.3806519453207}
+   {:economy "BW" :name "Botswana" :old 99.7645211930926 :new 99.8344827586207}
+   {:economy "CA" :name "Canada" :old 17.8645505923368 :new 17.9185429618421}
+   {:economy "CD" :name "Congo, Dem. Rep." :old 0.030188679245283 :new 0.0377358490566038}
+   {:economy "CG" :name "Congo, Rep." :old 77.4586076201875 :new 67.7233429394813}
+   {:economy "CH" :name "Switzerland" :old 0.625942340201946 :new 0.615701915348569}
+   {:economy "CI" :name "Cote d'Ivoire" :old 75.8988764044944 :new 75.4263439987007}
+   {:economy "CL" :name "Chile" :old 44.6774849207308 :new 44.4787474502453}]}
+ {:indicator "EG.ELC.NUCL.ZS" :observation-year 2022
+  :old-path "raw/wdi/nuclear-electricity-share-2022.json" :new-path "raw/wdi/2026-11-21/nuclear-electricity-share-2022.json"
+  :records-old 265 :records-new 266
+  :economies-in-both 265 :only-in-old [] :only-in-new ["F2"]
+  :n-value-changed 44
+  :n-became-null 0 :became-null []
+  :n-became-valued 0 :became-valued []
+  :examples
+  [   {:economy "1A" :name "Arab World" :old 1.47438017475514 :new 1.47316108783319}
+   {:economy "1W" :name "World" :old 9.16707308201654 :new 9.16611876203574}
+   {:economy "4E" :name "East Asia & Pacific (excluding high income)" :old 4.08245369171956 :new 4.08599809556448}
+   {:economy "7E" :name "Europe & Central Asia (excluding high income)" :old 8.32436985905589 :new 8.3156184148606}
+   {:economy "8S" :name "South Asia" :old 2.35118058887946 :new 2.35584868034769}
+   {:economy "CA" :name "Canada" :old 13.2465706415945 :new 13.2539364217}
+   {:economy "DE" :name "Germany" :old 5.99517401360051 :new 5.99518436888978}
+   {:economy "EU" :name "European Union" :old 21.5903610188261 :new 21.5777364897649}
+   {:economy "FR" :name "France" :old 62.2225928490601 :new 62.033612914768}
+   {:economy "IN" :name "India" :old 2.51725290594758 :new 2.52238110664445}
+   {:economy "JP" :name "Japan" :old 5.50959585488155 :new 5.50964999425157}
+   {:economy "KR" :name "Korea, Rep." :old 28.1740945046961 :new 27.6556606811574}
+   {:economy "OE" :name "OECD members" :old 15.7840466345287 :new 15.7673607655556}
+   {:economy "PK" :name "Pakistan" :old 17.6107839678706 :new 17.6109034415853}
+   {:economy "T2" :name "Latin America & the Caribbean (IDA & IBRD countries)" :old 1.95932682277764 :new 1.95835942759166}
+   {:economy "T3" :name "Middle East, North Africa, Afghanistan & Pakistan (IDA & IBRD)" :old 2.88672812452226 :new 2.88899651911769}
+   {:economy "T4" :name "East Asia & Pacific (IDA & IBRD countries)" :old 4.09307251579327 :new 4.0966353902818}
+   {:economy "T5" :name "South Asia (IDA & IBRD)" :old 2.35118058887946 :new 2.35584868034769}
+   {:economy "T6" :name "Sub-Saharan Africa (IDA & IBRD countries)" :old 2.14932241459421 :new 2.1428094612937}
+   {:economy "T7" :name "Europe & Central Asia (IDA & IBRD countries)" :old 13.9472719602188 :new 13.9418060174657}]}
+ {:indicator "EG.FEC.RNEW.ZS" :observation-year 2022
+  :old-path "raw/wdi/renewable-final-energy-share-2022.json" :new-path "raw/wdi/2026-11-21/renewable-final-energy-share-2022.json"
+  :records-old 265 :records-new 266
+  :economies-in-both 265 :only-in-old [] :only-in-new ["F2"]
+  :n-value-changed 0
+  :n-became-null 0 :became-null []
+  :n-became-valued 0 :became-valued []
+  :examples
+  []}
+ {:indicator "SP.POP.TOTL" :observation-year 2022
+  :old-path "raw/wdi/population-2022.json" :new-path "raw/wdi/2026-11-21/population-2022.json"
+  :records-old 265 :records-new 266
+  :economies-in-both 265 :only-in-old [] :only-in-new ["F2"]
+  :n-value-changed 0
+  :n-became-null 0 :became-null []
+  :n-became-valued 0 :became-valued []
+  :examples
+  []}
+ {:indicator "NY.GDP.PCAP.CD" :observation-year 2022
+  :old-path "raw/wdi/gdp-per-capita-current-usd-2022.json" :new-path "raw/wdi/2026-11-21/gdp-per-capita-current-usd-2022.json"
+  :records-old 265 :records-new 266
+  :economies-in-both 265 :only-in-old [] :only-in-new ["F2"]
+  :n-value-changed 7
+  :n-became-null 0 :became-null []
+  :n-became-valued 0 :became-valued []
+  :examples
+  [   {:economy "T6" :name "Sub-Saharan Africa (IDA & IBRD countries)" :old 1864.70686111924 :new 1864.70686111925}
+   {:economy "TV" :name "Tuvalu" :old 5911.32727055301 :new 5414.74642912412}
+   {:economy "XD" :name "High income" :old 47056.4874992383 :new 47056.4874992384}
+   {:economy "XF" :name "IBRD only" :old 7679.78639337735 :new 7679.78639337734}
+   {:economy "XN" :name "Lower middle income" :old 2347.99329840156 :new 2347.99329840157}
+   {:economy "XO" :name "Low & middle income" :old 5626.6962378216 :new 5626.69623782161}
+   {:economy "ZG" :name "Sub-Saharan Africa" :old 1864.70686111925 :new 1864.70686111924}]}
+ {:indicator "SP.DYN.LE00.IN" :observation-year 2022
+  :old-path "raw/wdi/life-expectancy-2022.json" :new-path "raw/wdi/2026-11-21/life-expectancy-2022.json"
+  :records-old 265 :records-new 266
+  :economies-in-both 265 :only-in-old [] :only-in-new ["F2"]
+  :n-value-changed 2
+  :n-became-null 0 :became-null []
+  :n-became-valued 0 :became-valued []
+  :examples
+  [   {:economy "S2" :name "Pacific island small states" :old 69.1004348993561 :new 69.1004348993562}
+   {:economy "XP" :name "Middle income" :old 72.5034114518773 :new 72.5034114518772}]}
+ {:indicator "IT.NET.USER.ZS" :observation-year 2022
+  :old-path "raw/wdi/internet-users-percent-2022.json" :new-path "raw/wdi/2026-11-21/internet-users-percent-2022.json"
+  :records-old 265 :records-new 266
+  :economies-in-both 265 :only-in-old [] :only-in-new ["F2"]
+  :n-value-changed 0
+  :n-became-null 0 :became-null []
+  :n-became-valued 0 :became-valued []
+  :examples
+  []}]}
