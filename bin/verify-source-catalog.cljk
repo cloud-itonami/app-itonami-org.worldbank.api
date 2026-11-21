@@ -1,0 +1,124 @@
+#!/usr/bin/env nbb
+;; Verifies raw/source-catalog.edn against the files under raw/.
+;; Reads files only; makes no network request.
+;; Fails (exit non-zero, cause on stderr) on:
+;; - a missing file named by a :sources or :series row
+;; - a sha256 mismatch, or a byte-size mismatch when the row states :bytes
+;; - a file under raw/ that no catalog row names
+;; - for :series rows: the response paging header's total differing
+;;   from the catalog :total, or the record count across the row's
+;;   page files differing from that total.
+(ns verify-source-catalog
+  (:require [clojure.edn :as edn]
+            [clojure.string :as str]))
+
+(def fs (js/require "fs"))
+(def crypto (js/require "crypto"))
+
+(def catalog-path "raw/source-catalog.edn")
+(def raw-dir "raw")
+
+(defn fail [msg]
+  (binding [*out* *err*]
+    (println (str "FAIL: " msg)))
+  (js/process.exit 1))
+
+(defn digest-file [p]
+  (let [buf (.readFileSync fs p)]
+    {:sha (-> crypto (.createHash "sha256") (.update buf) (.digest "hex"))
+     :bytes (.-length buf)}))
+
+(defn page-path
+  "Page 1 of a series row lives at :path; further pages (when :pages > 1)
+   live at the same path with .pN inserted before the .json suffix,
+   e.g. raw/wdi-series/foo-2000-2023.p2.json."
+  [base-path n]
+  (if (= n 1)
+    base-path
+    (str/replace base-path #"\.json$" (str ".p" n ".json"))))
+
+(defn list-files [dir]
+  (let [entries (.readdirSync fs dir #js {:withFileTypes true})]
+    (mapcat (fn [e]
+              (let [p (str dir "/" (.-name e))]
+                (if (.isDirectory e)
+                  (list-files p)
+                  [p])))
+            (array-seq entries))))
+
+(defn check-row-file [row]
+  (let [p (:path row)]
+    (when-not (.existsSync fs p)
+      (fail (str "missing file " p " for indicator " (:indicator row))))
+    (let [{:keys [sha bytes]} (digest-file p)]
+      (when-not (= sha (:sha256 row))
+        (fail (str "sha256 mismatch for " p
+                   " expected " (:sha256 row)
+                   " got " sha)))
+      ;; :sources rows predate byte recording and carry no :bytes;
+      ;; only enforce the size when the catalog states one.
+      (when (some? (:bytes row))
+        (when-not (= bytes (:bytes row))
+          (fail (str "bytes mismatch for " p
+                     " expected " (:bytes row)
+                     " got " bytes)))))))
+
+(defn check-series-pages [row]
+  (let [pages (or (:pages row) 1)
+        total (:total row)]
+    (when (nil? total)
+      (fail (str "series row for " (:indicator row) " has no :total")))
+    (let [counts
+          (map (fn [n]
+                 (let [p (page-path (:path row) n)]
+                   (when-not (.existsSync fs p)
+                     (fail (str "missing page file " p
+                                " for indicator " (:indicator row))))
+                   (let [doc (.parse js/JSON (.readFileSync fs p "utf8"))]
+                     (when-not (array? doc)
+                       (fail (str "page file " p " is not a JSON array")))
+                     (let [header (aget doc 0)
+                           records (aget doc 1)
+                           header-total (.-total header)]
+                       (when-not (= header-total total)
+                         (fail (str "paging header total mismatch in " p
+                                    " catalog :total " total
+                                    " header total " header-total)))
+                       (when-not (array? records)
+                         (fail (str "page file " p " has no record array")))
+                       (.-length records)))))
+               (range 1 (inc pages)))
+          seen (reduce + 0 counts)]
+      (when-not (= seen total)
+        (fail (str "record count mismatch for " (:indicator row)
+                   " catalog :total " total
+                   " records across " pages " page(s): " seen))))))
+
+(defn -main []
+  (when-not (.existsSync fs catalog-path)
+    (fail (str "missing catalog " catalog-path)))
+  (let [catalog (edn/read-string (.readFileSync fs catalog-path "utf8"))
+        sources (or (:sources catalog) [])
+        series (or (:series catalog) [])
+        named (atom #{})]
+    (doseq [row sources]
+      (check-row-file row)
+      (swap! named conj (:path row)))
+    (doseq [row series]
+      (check-row-file row)
+      (swap! named conj (:path row))
+      (doseq [n (range 2 (inc (or (:pages row) 1)))]
+        (swap! named conj (page-path (:path row) n)))
+      (check-series-pages row))
+    ;; The catalog itself lives under raw/ but is the record, not data.
+    (let [on-disk (disj (set (list-files raw-dir)) catalog-path)
+          unlisted (sort (remove @named on-disk))]
+      (when (seq unlisted)
+        (fail (str "file(s) under raw/ not named by any catalog row: "
+                   (str/join ", " unlisted)))))
+    (let [total-bytes (reduce + 0 (map #(.-length (.readFileSync fs %)) @named))]
+      (println (str "sources: " (count sources)
+                    ", series: " (count series)
+                    ", total bytes: " total-bytes)))))
+
+(-main)
