@@ -20,3 +20,24 @@
 - `SL.UEM.TOTL.ZS` — Unemployment, total (% of total labor force) (modeled ILO estimate) — `unemployment-total-2000-2023.json`
 - `SH.XPD.CHEX.GD.ZS` — Current health expenditure (% of GDP) — `current-health-expenditure-share-2000-2023.json`
 - `AG.LND.FRST.ZS` — Forest area (% of land area) — `forest-area-share-2000-2023.json`
+
+## 単年 snapshot の 2026-11-21 更新セット
+
+`:sources` の 8 指標は World Bank 側で改訂が続いているため、同じ 8 指標・同じ観測年を 2026-11-21 に再取得した dated set を `raw/wdi/2026-11-21/` に保存しました（ファイル名は `raw/wdi/` と同一、応答ボディ無改変）。既存ファイルは energy projection が参照しているため上書きせず、`raw/source-catalog.edn` の `:sources` と `:series` は不変です。新セットの catalog 行は `:snapshots` にあり、要求 URL・`:sha256`・`:bytes`・`:retrieved-at`・ページング（`:total` 266、`:pages` 1）を記録しています。`bin/verify-source-catalog.cljk` は新行の sha・バイト数・ページングを検証し、同ディレクトリの `DIFF.edn` の存在を要求します。
+
+新旧の差分は `raw/wdi/2026-11-21/DIFF.edn` に実測で記録しています（キーは `country.id`。`countryiso3code` は所得グループ集計で空のため）。全 8 ファイルで新集計 `F2`（Fragility, Conflict, and Violence situations）が増え、265 → 266 レコードになりました。両方にいる 265 件のうち値が変わった件数は次のとおりです。
+
+| 指標 | 観測年 | 値が変わった件数 |
+| --- | --- | --- |
+| `EG.ELC.RNEW.ZS`（renewable electricity share） | 2021 | 77 |
+| `EG.ELC.FOSL.ZS`（fossil electricity share） | 2022 | 129 |
+| `EG.ELC.NUCL.ZS`（nuclear electricity share） | 2022 | 44 |
+| `EG.FEC.RNEW.ZS`（renewable final energy share） | 2022 | 0 |
+| `SP.POP.TOTL`（population） | 2022 | 0 |
+| `NY.GDP.PCAP.CD`（GDP per capita） | 2022 | 7 |
+| `SP.DYN.LE00.IN`（life expectancy） | 2022 | 2 |
+| `IT.NET.USER.ZS`（internet users） | 2022 | 0 |
+
+null と非 null の間の変化はありませんでした。最大 20 件の新旧ペア例は `DIFF.edn` の `:examples` にあります。
+
+このセットに切り替えるかどうかは owner の判断です。projection は引き続き `:sources` のファイルを参照しています。
